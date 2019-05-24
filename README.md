@@ -1,4 +1,4 @@
-# relais-button-docker-arm
+# relais-switch-on-off-docker-arm
 Docker to provide a relais-switch-actor listening on a mqtt topic
 Send "ON" to switch on
 Send "OFF" to switch off
