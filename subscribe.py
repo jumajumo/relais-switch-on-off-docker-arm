@@ -3,7 +3,16 @@ import paho.mqtt.client as mqtt
 import RPi.GPIO as gpio
 import time
 import os
+import sys
 import datetime
+
+pid=str(os.getpid())
+pidfile = "subscribe.pid"
+
+if os.path.isfile(pidfile):
+    sys.exit()
+open(pidfile,"w").write(pid)
+
 
 thingid = os.getenv('thingid','actor')
 brokeraddr = os.getenv('brokeraddr','openhabian')
@@ -54,5 +63,8 @@ client.publish(commandTopic, "ONLINE")
 
 client.subscribe(commandTopic, qos=0)
 
-client.loop_forever()
+try:
+   client.loop_forever()
+finally: 
+   os.unlink(pidfile)
 
