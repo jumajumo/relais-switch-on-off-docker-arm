@@ -6,14 +6,6 @@ import os
 import sys
 import datetime
 
-pid=str(os.getpid())
-pidfile = "subscribe.pid"
-
-if os.path.isfile(pidfile):
-    sys.exit()
-open(pidfile,"w").write(pid)
-
-
 thingid = os.getenv('thingid','actor')
 brokeraddr = os.getenv('brokeraddr','openhabian')
 pin = int(os.getenv('pin', '17'))
@@ -63,8 +55,5 @@ client.publish(commandTopic, "ONLINE")
 
 client.subscribe(commandTopic, qos=0)
 
-try:
-   client.loop_forever()
-finally: 
-   os.unlink(pidfile)
+client.loop_forever()
 
