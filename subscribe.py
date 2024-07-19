@@ -51,7 +51,7 @@ client.publish(thingTopic + "sys/type", "actor", qos=1, retain=True)
 client.publish(thingTopic + "sys/device", "relais-switch_on-off", qos=1, retain=True)
 client.publish(thingTopic + "sys/state", "ONLINE", qos=1, retain=True)
 
-client.publish(commandTopic, "ONLINE")
+client.publish(commandTopic, "OFF", qos=1, retain=True)
 
 client.subscribe(commandTopic, qos=0)
 
